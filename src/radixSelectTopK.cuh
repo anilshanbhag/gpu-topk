@@ -384,10 +384,15 @@ cudaError_t radixSelectTopK(KeyT *d_keys_in, uint num_items, uint k, KeyT *d_key
   uint* d_histogram;
   CubDebugExit(g_allocator.DeviceAllocate((void**)&d_histogram, sizeof(uint) * num_items));
 
+  // We allocate two indices, one that maintains index into output array (this goes till K)
+  // second maintains index into the output buffer containing reduced set of top-k candidates.
   uint* d_index_out;
   uint* d_index_buffer;
   CubDebugExit(g_allocator.DeviceAllocate((void**)&d_index_out, sizeof(uint)));
   CubDebugExit(g_allocator.DeviceAllocate((void**)&d_index_buffer, sizeof(uint)));
+
+  // Set the index into output array to 0.
+  cudaMemset(d_index_out, 0, 4);
 
   uint* h_histogram = new uint[256];
 

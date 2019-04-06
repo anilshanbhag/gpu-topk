@@ -25,10 +25,10 @@ SOURCE_DIR = ./src/
 TEST_DIR = ./test/
 INCLUDES := -I$(CUB_DIR) -I$(SOURCE_DIR) -I$(TEST_DIR)
 
-obj/%.o: src/%.cu $(DEPS)
-	$(NVCC) $(CFLAGS) -I. $(INCLUDES) -g $(GENCODE_FLAGS) $< -o $@
+#obj/%.o: src/%.cu $(DEPS)
+#	$(NVCC) $(CFLAGS) -I. $(INCLUDES) -g $(GENCODE_FLAGS) $< -o $@
 
-compareTopKAlgorithms:
+compareTopKAlgorithms: test/compareTopKAlgorithms.cu src/bitonicTopK.cuh src/radixSelectTopK.cuh src/sortTopK.cuh
 	$(NVCC) $(CFLAGS) $(INCLUDES) test/compareTopKAlgorithms.cu $(LDFLAGS) -o compareTopKAlgorithms
 
 clean:

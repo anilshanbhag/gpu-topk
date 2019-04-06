@@ -704,6 +704,10 @@ cudaError_t bitonicTopK(KeyT *d_keys_in, unsigned int num_items, unsigned int k,
   cudaMemcpy(res_vec, d_keys.Current(), 2 * numThreads * NUM_GROUPS * sizeof(KeyT), cudaMemcpyDeviceToHost);
   std::sort(res_vec, res_vec + 2*numThreads*NUM_GROUPS, std::greater<KeyT>());
   cudaMemcpy(d_keys_out, res_vec, k * sizeof(KeyT), cudaMemcpyHostToDevice);
+
+  if (d_keys.d_buffers[1])
+    CubDebugExit(g_allocator.DeviceFree(d_keys.d_buffers[1]));
+
   return cudaSuccess;
 }
 
