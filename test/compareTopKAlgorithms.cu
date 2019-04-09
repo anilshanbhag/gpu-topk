@@ -279,15 +279,15 @@ int main(int argc, char** argv)
   } else {
     printf("Please enter the type of value you want to test:\n1-float\n2-double\n3-uint\n");
     cin >> type;
-    printf("Please enter Distribution type: ");
+    printf("Please enter distribution type: ");
     cin >> distributionType;
     printf("Please enter K: ");
     cin >> K;
-    printf("Please enter  number of tests to run per K: ");
+    printf("Please enter number of tests to run per K: ");
     cin >> testCount;
-    printf("Please enter Start power: ");
+    printf("Please enter start power (dataset size starts at 2^start)(max val: 29): ");
     cin >> startPower;
-    printf("Please enter Stop power: ");
+    printf("Please enter stop power (dataset size stops at 2^stop)(max val: 29): ");
     cin >> stopPower;
   }
 
